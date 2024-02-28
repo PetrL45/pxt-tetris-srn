@@ -32,11 +32,14 @@ function refresh(display: Display, dot: Piece): void{
 refresh(dData, dot)
 
 loops.everyInterval(1000, function() {
-    dot.y += 1;
-
-    if(dot.y > 4) dot.y = 0
-    else(dData[dot.y + 1][dot.x])
-
+    if (dot.y < 4 && !dData[dot.y + 1][dot.x]) {
+        dot.y += 1;
+    } else {
+        dData[dot.y][dot.x] = true;
+        dot.y = 0;
+        dot.x = 2;
+    }
+    
     refresh(dData, dot)
 })
 input.onGesture(Gesture.TiltLeft, function() {
